@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cal Peptides — Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1f3c;
+      --navy-mid: #162d52;
+      --navy-light: #1e3d6e;
+      --gold: #c8991a;
+      --gold-light: #f0be45;
+      --gold-pale: #f7e09a;
+      --white: #f5f2ec;
+      --off: #e8e2d4;
+      --muted: rgba(245,242,236,0.45);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Background ── */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(200,153,26,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 90%, rgba(30,61,110,0.9) 0%, transparent 60%),
+        linear-gradient(165deg, #0a1728 0%, #0d1f3c 50%, #071224 100%);
+    }
+    .bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+    }
+
+    /* ── DNA helix SVG lines ── */
+    .dna-bg {
+      position: fixed;
+      right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 340px; height: 700px;
+      opacity: 0.06;
+      z-index: 0;
+      animation: dna-drift 8s ease-in-out infinite;
+    }
+    @keyframes dna-drift {
+      0%,100% { transform: translateY(-50%) rotate(0deg); }
+      50% { transform: translateY(-52%) rotate(1.5deg); }
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: clamp(24px, 5vw, 60px) clamp(24px, 6vw, 80px);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .logo-mark {
+      width: 44px; height: 44px;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--off);
+      opacity: 0.75;
+    }
+
+    /* ── Main ── */
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(48px, 10vh, 100px) 0 clamp(32px, 6vh, 64px);
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: clamp(52px, 10vw, 108px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 12px;
+      animation: fadeUp 0.9s 0.25s ease both;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .subtitle {
+      font-size: clamp(15px, 2vw, 19px);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 480px;
+      margin-top: 28px;
+      margin-bottom: 52px;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    /* ── Notify form ── */
+    .notify-wrap {
+      animation: fadeUp 0.9s 0.45s ease both;
+    }
+    .notify-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .notify-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      border: 1px solid rgba(200,153,26,0.35);
+      border-radius: 3px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .notify-form:focus-within {
+      border-color: rgba(200,153,26,0.75);
+      box-shadow: 0 0 0 3px rgba(200,153,26,0.08);
+    }
+    .notify-form input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+    .notify-form input::placeholder {
+      color: rgba(245,242,236,0.25);
+    }
+    .notify-form button {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 14px 22px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.25s;
+    }
+    .notify-form button:hover { background: var(--gold-light); }
+
+    .success-msg {
+      display: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+      margin-top: 14px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .success-msg.show { display: block; }
+    .success-msg.visible { opacity: 1; }
+
+    /* ── Pillars ── */
+    .pillars {
+      display: flex;
+      gap: clamp(24px, 5vw, 56px);
+      flex-wrap: wrap;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(245,242,236,0.08);
+      animation: fadeUp 0.9s 0.6s ease both;
+    }
+    .pillar { flex: 1; min-width: 140px; }
+    .pillar-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+    .pillar-title {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    .pillar-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(245,242,236,0.06);
+      animation: fadeUp 0.9s 0.75s ease both;
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: rgba(245,242,236,0.22);
+      text-transform: uppercase;
+    }
+    .disclaimer {
+      font-family: 'DM Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.18);
+      letter-spacing: 0.06em;
+      max-width: 340px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .notify-form { flex-direction: column; }
+      .notify-form button { padding: 13px; letter-spacing: 0.1em; }
+      .disclaimer { text-align: left; max-width: 100%; }
+      .dna-bg { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<!-- DNA decoration -->
+<svg class="dna-bg" viewBox="0 0 200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M60 20 C120 80, 80 160, 140 220 C80 280, 120 360, 60 420 C120 480, 80 560, 140 580" stroke="#c8991a" stroke-width="1.5"/>
+  <path d="M140 20 C80 80, 120 160, 60 220 C120 280, 80 360, 140 420 C80 480, 120 560, 60 580" stroke="#1e3d6e" stroke-width="1.5"/>
+  <line x1="80" y1="54" x2="120" y2="62" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="97" y1="100" x2="103" y2="108" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="73" y1="148" x2="127" y2="138" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="108" y1="192" x2="92" y2="200" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="130" y1="238" x2="70" y2="244" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="100" y1="284" x2="100" y2="292" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="72" y1="330" x2="128" y2="320" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="110" y1="374" x2="90" y2="382" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="132" y1="420" x2="68" y2="428" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="98" y1="468" x2="102" y2="476" stroke="#c8991a" stroke-width="0.8"/>
+  <line x1="74" y1="518" x2="126" y2="510" stroke="#c8991a" stroke-width="0.8"/>
+</svg>
+
+<div class="page">
+  <!-- Header -->
+  <header>
+    <svg class="logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 4 C12.06 4 4 12.06 4 22 C4 31.94 12.06 40 22 40 C28 40 33.3 37.1 36.7 32.6" stroke="#c8991a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <circle cx="22" cy="14" r="2.2" fill="#1e3d6e"/>
+      <circle cx="18" cy="18" r="2.2" fill="#1e3d6e"/>
+      <circle cx="22" cy="22" r="2.2" fill="#1e3d6e"/>
+      <circle cx="18" cy="26" r="2.2" fill="#1e3d6e"/>
+      <circle cx="22" cy="30" r="2.2" fill="#1e3d6e"/>
+      <line x1="18" y1="18" x2="22" y2="14" stroke="#c8991a" stroke-width="0.9"/>
+      <line x1="22" y1="22" x2="18" y2="18" stroke="#c8991a" stroke-width="0.9"/>
+      <line x1="18" y1="26" x2="22" y2="22" stroke="#c8991a" stroke-width="0.9"/>
+      <line x1="22" y1="30" x2="18" y2="26" stroke="#c8991a" stroke-width="0.9"/>
+    </svg>
+    <span class="brand-name">Cal Peptides</span>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <p class="eyebrow">Launching Soon</p>
+
+    <h1>
+      Research-grade.<br>
+      <em>Delivered right.</em>
+    </h1>
+
+    <p class="subtitle">
+      Certified Peptides is building a smarter way to access high-quality research peptides — bundled with the supplies, instructions, and expertise you need, delivered directly to you.
+    </p>
+
+    <div class="notify-wrap">
+      <span class="notify-label">Get early access</span>
+      <div class="notify-form" id="notifyForm">
+        <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email" />
+        <button onclick="handleSubmit()">Notify Me</button>
+      </div>
+      <p class="success-msg" id="successMsg">✓ &nbsp;You're on the list. We'll be in touch.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <p class="pillar-num">01</p>
+        <p class="pillar-title">Certified Quality</p>
+        <p class="pillar-body">Every batch comes with certificates of analysis and third-party verification.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">02</p>
+        <p class="pillar-title">Complete Kits</p>
+        <p class="pillar-body">Peptides, bacteriostatic water, syringes, and step-by-step instructions — all in one.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">03</p>
+        <p class="pillar-title">Local Delivery</p>
+        <p class="pillar-body">Hand-delivered to your door on a schedule that works for you.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-copy">© 2025 Certified Peptides — All rights reserved</span>
+    <span class="disclaimer">For research purposes only. Not intended for human use or consumption. 18+ only.</span>
+  </footer>
+</div>
+
+<script>
+  function handleSubmit() {
+    const input = document.getElementById('emailInput');
+    const msg = document.getElementById('successMsg');
+    const email = input.value.trim();
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!re.test(email)) {
+      input.style.outline = '1px solid rgba(255,80,80,0.6)';
+      setTimeout(() => input.style.outline = '', 1200);
+      return;
+    }
+    // In production, replace this with a fetch() to your backend or a form service like Formspree
+    document.getElementById('notifyForm').style.opacity = '0.4';
+    document.getElementById('notifyForm').style.pointerEvents = 'none';
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.add('visible'), 20);
+  }
+  document.getElementById('emailInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSubmit();
+  });
+</script>
+
+</body>
+</html>
