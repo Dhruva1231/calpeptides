@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 226 100% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 226 100% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 100% 14%;
+
+    --primary: 226 100% 23%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 42 98% 54%;
+    --secondary-foreground: 226 100% 14%;
+
+    --muted: 226 15% 95%;
+    --muted-foreground: 226 20% 45%;
+
+    --accent: 42 98% 54%;
+    --accent-foreground: 226 100% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 226 20% 88%;
+    --input: 226 20% 88%;
+    --ring: 42 98% 54%;
+
+    --radius: 0.5rem;
+
+    --hero-gradient: linear-gradient(135deg, hsl(226 100% 14%), hsl(226 100% 23%), hsl(226 80% 30%));
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 226 100% 14%;
+    --sidebar-primary: 226 100% 23%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 226 15% 95%;
+    --sidebar-accent-foreground: 226 100% 14%;
+    --sidebar-border: 226 20% 88%;
+    --sidebar-ring: 42 98% 54%;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
